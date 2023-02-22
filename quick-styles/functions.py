@@ -4,7 +4,7 @@ from time import strftime
 system("")
 
 color_codes = {
-    # color:(fg, bg)
+    # color: (fg, bg),
     "black": (30, 40),
     "red": (31, 41),
     "green": (32, 42),
@@ -32,13 +32,13 @@ style_codes = {
 }
 
 modifiers = {
-
+    "time_display": "",
+    "warning": ""
 }
 
 custom_codes = {
 
 }
-
 
 def create_code(str, **kwargs):
     values = []
@@ -70,9 +70,6 @@ def create_code(str, **kwargs):
         styles = list(map(lambda x: style_codes[x], styles))
         values.extend(styles)
 
-    values = list(map(lambda x: str(x), values))
-    ansi_code = f"\033[{';'.join(sorted(values))}mLorem ipsum dolor sit amet"
+    values = [str(i) for i in values]
+    ansi_code = f"\033[{';'.join(sorted(values))}m"
     return ansi_code
-
-
-print(create_code())
