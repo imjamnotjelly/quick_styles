@@ -25,10 +25,10 @@ color_codes = {
 
 style_codes = {
     "bold": 1,
-    "italic":3,
-    "underline":4,
-    "blink":5,
-    "strikethrough":9,
+    "italic": 3,
+    "underline": 4,
+    "blink": 5,
+    "strikethrough": 9,
 }
 
 modifiers = {
@@ -40,7 +40,7 @@ custom_codes = {
 }
 
 
-def create_code(**kwargs):
+def create_code(str, **kwargs):
     values = []
 
     # foreground colors
@@ -65,18 +65,14 @@ def create_code(**kwargs):
     except KeyError:
         pass
     else:
-        print(styles)
         if isinstance(styles, str):
             styles = [styles]
-            print(styles)
         styles = list(map(lambda x: style_codes[x], styles))
-        print(styles)
-        values.append(styles)
-        print(values)
+        values.extend(styles)
 
     values = list(map(lambda x: str(x), values))
-    print(values)
     ansi_code = f"\033[{';'.join(sorted(values))}mLorem ipsum dolor sit amet"
     return ansi_code
 
-print(create_code(color="blue", styles="bold"))
+
+print(create_code())
