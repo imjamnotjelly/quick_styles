@@ -26,6 +26,7 @@ color_codes = {
 }
 
 style_codes = {
+    # style-name: ansi-num
     "bold": 1,
     "italic": 3,
     "underline": 4,
@@ -34,12 +35,13 @@ style_codes = {
 }
 
 modifiers = {
+    # modifier: template
     "time_display": f"[{strftime('%H:%M:%S')}] " + "{}",
     "warning": "! {} !",
-
 }
 
 custom_codes = {}
+
 
 def create_code(**kwargs):
     values = []
@@ -60,11 +62,14 @@ def create_code(**kwargs):
         styles = list(map(lambda x: style_codes[x], styles))
         values.extend(styles)
 
+    # merging styles and generating ansi escape code
     values = [str(i) for i in values]
     ansi_code = f"\033[{';'.join(sorted(values))}m"
     return ansi_code
 
-def style_string(str, **kwargs):
+
+def style_string(string, **kwargs):
+    # configuring ansi code
     ansi_code = ""
     if "custom_code" in kwargs:
         if kwargs["custom_code"].startswith("\033["):
@@ -72,16 +77,21 @@ def style_string(str, **kwargs):
         else:
             ansi_code = custom_codes[kwargs["custom_code"]]
     else:
-        code_args = {k:v for k, v in kwargs.items() if k in valid_args}
+        code_args = {k: v for k, v in kwargs.items() if k in valid_args}
         ansi_code = create_code(**code_args)
 
+    # applying modifier if present
     if "modifier" in kwargs:
-        str = modifiers[kwargs["modifier"]].format(str)
+        string = modifiers[kwargs["modifier"]].format(string)
 
-    return ansi_code + str + "\033[0m"
+    # forming string
+    return ansi_code + string + "\033[0m"
 
-def cprint(str, **kwargs):
-    print(style_string(str, **kwargs))
 
-def cinput(str, **kwargs):
-    return input(style_string(str, **kwargs))
+# dedicated functions for print & input styling
+def cprint(string, **kwargs):
+    print(style_string(string, **kwargs))
+
+
+def cinput(string, **kwargs):
+    return input(style_string(string, **kwargs))
