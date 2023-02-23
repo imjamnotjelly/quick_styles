@@ -1,6 +1,7 @@
 from os import system
 from time import strftime
 
+# enabling ansi codes for windows cmd
 system("")
 
 valid_args = ["color", "bgcolor", "styles"]
