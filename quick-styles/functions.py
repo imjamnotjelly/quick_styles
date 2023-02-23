@@ -3,6 +3,8 @@ from time import strftime
 
 system("")
 
+valid_args = ["color", "bgcolor", "styles"]
+
 color_codes = {
     # color: (fg, bg),
     "black": (30, 40),
@@ -32,39 +34,27 @@ style_codes = {
 }
 
 modifiers = {
-    "time_display": "",
-    "warning": ""
-}
-
-custom_codes = {
+    "time_display": f"[{strftime('%H:%M:%S')}] " + "{}",
+    "warning": "! {} !",
 
 }
 
-def create_code(str, **kwargs):
+custom_codes = {}
+
+def create_code(**kwargs):
     values = []
 
     # foreground colors
-    try:
-        color = kwargs["color"]
-    except KeyError:
-        pass
-    else:
-        values.append(color_codes[color][0])
+    if "color" in kwargs:
+        values.append(color_codes[kwargs["color"]][0])
 
     # background colors
-    try:
-        bgcolor = kwargs["bgcolor"]
-    except KeyError:
-        pass
-    else:
-        values.append(color_codes[bgcolor][1])
+    if "bgcolor" in kwargs:
+        values.append(color_codes[kwargs["bgcolor"]][1])
 
     # text styles
-    try:
+    if "styles" in kwargs:
         styles = kwargs["styles"]
-    except KeyError:
-        pass
-    else:
         if isinstance(styles, str):
             styles = [styles]
         styles = list(map(lambda x: style_codes[x], styles))
@@ -73,3 +63,25 @@ def create_code(str, **kwargs):
     values = [str(i) for i in values]
     ansi_code = f"\033[{';'.join(sorted(values))}m"
     return ansi_code
+
+def style_string(str, **kwargs):
+    ansi_code = ""
+    if "custom_code" in kwargs:
+        if kwargs["custom_code"].startswith("\033["):
+            ansi_code = kwargs["custom_code"]
+        else:
+            ansi_code = custom_codes[kwargs["custom_code"]]
+    else:
+        code_args = {k:v for k, v in kwargs.items() if k in valid_args}
+        ansi_code = create_code(**code_args)
+
+    if "modifier" in kwargs:
+        str = modifiers[kwargs["modifier"]].format(str)
+
+    return ansi_code + str + "\033[0m"
+
+def cprint(str, **kwargs):
+    print(style_string(str, **kwargs))
+
+def cinput(str, **kwargs):
+    return input(style_string(str, **kwargs))
