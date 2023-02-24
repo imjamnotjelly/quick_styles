@@ -1,7 +1,7 @@
 <img src="banner.png">
 
 <div align="center">
-  <h1>quick styles</h1>
+  <h1>quick_styles</h1>
   <label>An unbelievably lightweight Python library for effortlessly applying ANSI escape color & style codes to Windows CMD and other ANSI-supported terminals</label>
 </div>
 <br>
@@ -9,7 +9,7 @@
 
 ## Description
 
-Quick Styles enhances the experience of using the current unintuitive ANSI escape code system for text styling in Python. With Quick Styles, you can easily generate ANSI codes with set parameters, save styles for future use, and implement custom codes for personalized styles.
+quick_styles enhances the experience of using the current unintuitive ANSI escape code system for text styling in Python. With quick_styles, you can easily generate ANSI codes with set parameters, save styles for future use, and implement custom codes for personalized styles.
 
 ## Download
 
