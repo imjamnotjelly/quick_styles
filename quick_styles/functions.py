@@ -43,14 +43,17 @@ modifiers = {
 
 custom_codes = {}
 
+
 class Defaults:
     def __init__(self):
         self.reset()
 
     def reset(self):
-        self.values = {k:None for k in ["color", "bgcolor", "styles", "modifier"]}
+        self.values = {k: None for k in ["color", "bgcolor", "styles", "modifier"]}
+
 
 defaults = Defaults()
+
 
 def create_code(**kwargs):
     values = []
