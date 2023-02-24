@@ -43,6 +43,14 @@ modifiers = {
 
 custom_codes = {}
 
+class Defaults:
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.values = {k:None for k in ["color", "bgcolor", "styles", "modifier"]}
+
+defaults = Defaults()
 
 def create_code(**kwargs):
     values = []
@@ -50,14 +58,23 @@ def create_code(**kwargs):
     # foreground colors
     if "color" in kwargs:
         values.append(color_codes[kwargs["color"]][0])
+    elif defaults.values["color"]:
+        values.append(color_codes[defaults.values["color"]][0])
 
     # background colors
     if "bgcolor" in kwargs:
         values.append(color_codes[kwargs["bgcolor"]][1])
+    elif defaults.values["color"]:
+        values.append(color_codes[defaults.values["color"]][0])
 
     # text styles
+    styles = 0
     if "styles" in kwargs:
         styles = kwargs["styles"]
+    elif defaults.values["styles"]:
+        styles = defaults.values["styles"]
+
+    if styles:
         if isinstance(styles, str):
             styles = [styles]
         styles = list(map(lambda x: style_codes[x], styles))
@@ -84,6 +101,8 @@ def style_string(string, **kwargs):
     # applying modifier if present
     if "modifier" in kwargs:
         string = modifiers[kwargs["modifier"]].format(string)
+    elif defaults.values["modifier"]:
+        string = modifiers[defaults.values["modifier"]].format(string)
 
     # forming string
     return ansi_code + string + "\033[0m"
