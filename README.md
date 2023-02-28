@@ -23,7 +23,7 @@ pip install quick_styles
 
 ### Example program
 
-Before we proceed to the explict info regarding the library's functionality, here's a prieview of the core functions of quick_styles:
+Before we proceed to the explict info regarding the library's functionality, here's a preview of the core functions of quick_styles to get a sense of its capabilities:
 
 ```python
 import quick_styles as qs
