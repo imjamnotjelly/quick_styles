@@ -39,7 +39,7 @@ qs.cprint("Well, well, what do we have here? I'm a styled print statement as wel
           "visible. It's just an additional parameter!", color="blue")
 ex_input = qs.cinput("This applies to inputs too!")
 
-qs.cprint("This works for applying a text style as well!", styles="bold")
+qs.cprint("This works for applying a text style as well.", styles="bold")
 qs.cprint("Or multiple...", styles=["bold", "underline"])
 
 # To apply a particular assortment of styles to multiple strings, you can create custom ANSI codes to apply in the future

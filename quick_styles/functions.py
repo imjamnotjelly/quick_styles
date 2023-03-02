@@ -68,7 +68,7 @@ def create_code(**kwargs):
     if "bgcolor" in kwargs:
         values.append(color_codes[kwargs["bgcolor"]][1])
     elif defaults.values["color"]:
-        values.append(color_codes[defaults.values["color"]][0])
+        values.append(color_codes[defaults.values["color"]][1])
 
     # text styles
     styles = 0
