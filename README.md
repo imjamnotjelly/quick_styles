@@ -1,7 +1,7 @@
 <img src="banner.png">
 
 <div align="center">
-  <h1>quick_styles</h1>
+  <h1>quick_styles (wip)</h1>
   <label>An unbelievably lightweight Python library for effortlessly applying ANSI escape color & style codes to Windows CMD and other ANSI-supported terminals</label>
 </div>
 <br>
