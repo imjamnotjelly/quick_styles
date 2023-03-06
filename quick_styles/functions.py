@@ -4,7 +4,7 @@ from time import strftime
 # enabling ansi codes for windows cmd
 system("")
 
-valid_args = ["color", "bgcolor", "styles"]
+valid_args = ["color", "bgcolor", "styles", "modifier", "custom_code"]
 
 color_codes = {
     # color: (fg, bg),
@@ -29,10 +29,14 @@ color_codes = {
 style_codes = {
     # style-name: ansi-num
     "bold": 1,
+    "dim": 2,
     "italic": 3,
     "underline": 4,
     "blink": 5,
+    "fastblink": 6,
     "strikethrough": 9,
+    "superscript": 73,
+    "subscript": 74
 }
 
 modifiers = {
@@ -49,7 +53,7 @@ class Defaults:
         self.reset()
 
     def reset(self):
-        self.values = {k: None for k in ["color", "bgcolor", "styles", "modifier"]}
+        self.values = {k: None for k in valid_args}
 
 
 defaults = Defaults()
@@ -91,14 +95,18 @@ def create_code(**kwargs):
 
 def style_string(string, **kwargs):
     # configuring ansi code
-    ansi_code = ""
+    custom_code = ""
     if "custom_code" in kwargs:
-        if kwargs["custom_code"].startswith("\033["):
-            ansi_code = kwargs["custom_code"]
+        custom_code = kwargs["custom_code"]
+    elif defaults.values["custom_code"]:
+        custom_code = defaults.values["custom_codes"]
+    if custom_code:
+        if custom_code.startswith("\033["):
+            ansi_code = custom_code
         else:
-            ansi_code = custom_codes[kwargs["custom_code"]]
+            ansi_code = custom_codes[custom_code]
     else:
-        code_args = {k: v for k, v in kwargs.items() if k in valid_args}
+        code_args = {k: v for k, v in kwargs.items() if k in valid_args[:3]}
         ansi_code = create_code(**code_args)
 
     # applying modifier if present
