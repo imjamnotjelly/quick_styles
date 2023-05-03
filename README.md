@@ -11,7 +11,7 @@
 
 quick_styles enhances the experience of using the current unintuitive ANSI escape code system for text styling in Python. With quick_styles, you can easily generate ANSI codes with set parameters, save styles for future use, and implement custom codes for personalized styles.
 
-## Download (not really yet)
+## Download
 
 From PyPI using `pip`:
 
