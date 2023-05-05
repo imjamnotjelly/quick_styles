@@ -16,7 +16,7 @@ quick_styles enhances the experience of using the current unintuitive ANSI escap
 From PyPI using `pip`:
 
 ```shell
-pip install quick_styles
+pip install quick-styles
 ```
 
 ## Usage
