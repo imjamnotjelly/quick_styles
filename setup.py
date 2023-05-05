@@ -9,7 +9,7 @@ with open(path.join(HERE, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name="quick_styles",
-    version="1.0.1",
+    version="1.0.2",
     description="A ridiculously lightweight Python library for effortlessly applying ANSI escape color & style codes to Windows CMD.",
     long_description=long_description,
     long_description_content_type="text/markdown",
