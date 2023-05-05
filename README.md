@@ -1,8 +1,8 @@
-<img src="banner.png">
+<img src="https://raw.githubusercontent.com/imjamnotjelly/quick_styles/master/banner.png">
 
 <div align="center">
-  <h1>quick_styles (wip)</h1>
-  <label>An unbelievably lightweight Python library for effortlessly applying ANSI escape color & style codes to Windows CMD and other ANSI-supported terminals</label>
+  <h1>quick_styles</h1>
+  <p>An unbelievably lightweight Python library for effortlessly applying ANSI escape color & style codes to Windows CMD and other ANSI-supported terminals</p>
 </div>
 <br>
 <br>
@@ -71,5 +71,3 @@ qs.defaults.reset()
 # Strings can also be styled without being immediately printed
 styled_string = qs.style_string("You can't see me...", styles="italic")
 ```
-
-### Function Refrence
