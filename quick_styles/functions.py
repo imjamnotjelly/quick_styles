@@ -71,8 +71,8 @@ def create_code(**kwargs):
     # background colors
     if "bgcolor" in kwargs:
         values.append(color_codes[kwargs["bgcolor"]][1])
-    elif defaults.values["color"]:
-        values.append(color_codes[defaults.values["color"]][1])
+    elif defaults.values["bgcolor"]:
+        values.append(color_codes[defaults.values["bgcolor"]][1])
 
     # text styles
     styles = 0
@@ -120,9 +120,9 @@ def style_string(string, **kwargs):
 
 
 # dedicated functions for print & input styling
-def cprint(string, **kwargs):
+def xprint(string, **kwargs):
     print(style_string(string, **kwargs))
 
 
-def cinput(string, **kwargs):
+def xinput(string, **kwargs):
     return input(style_string(string, **kwargs))
